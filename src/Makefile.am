@@ -26,7 +26,6 @@ main_LDFLAGS  =
 
 main_LDADD    =
 
-
 # C++ Preprocessor flags.
 # -----------------------
 
@@ -38,6 +37,17 @@ main_CPPFLAGS = -std=c++11 \
 # ----------------------
 
 main_CXXFLAGS = 
+
+
+lib_LTLIBRARIES     = librhdg.la
+
+librhdg_la_SOURCES  = RandomHexadecimalDigitGenerator.cpp
+
+librhdg_la_CPPFLAGS = -std=c++11 \
+                      -DHAVE_CONFIG_H \
+                      ${main_INCLUDES}
+
+include_HEADERS     = ../include/RandomHexadecimalDigitGenerator.hpp
 
 
 .PHONY: displaySettings
