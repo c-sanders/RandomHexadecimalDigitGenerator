@@ -24,7 +24,7 @@ main_INCLUDES = -I${top_srcdir}/include
 
 main_LDFLAGS  =
 
-main_LDADD    =
+main_LDADD    = librhdg.la
 
 # C++ Preprocessor flags.
 # -----------------------
