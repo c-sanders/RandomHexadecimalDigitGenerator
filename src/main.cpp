@@ -10,8 +10,23 @@ using std::cout;
 using std::endl;
 
 
+RandomHexadecimalDigitGenerator * rhdg_p = nullptr;
+
+
 RandomHexadecimalDigitGenerator *
 createAndTestRHDG
+(
+);
+
+
+void
+generateTestStrings_batch_1
+(
+);
+
+
+void
+generateTestStrings_batch_2
 (
 );
 
@@ -25,10 +40,6 @@ main
 	const
 	string                            nameFunction = "main : ";
 
-	RandomHexadecimalDigitGenerator * rhdg_p = nullptr;
-
-	int                               stringLength = 0;
-
 
 	cout << nameFunction << "Enter" << endl;
 
@@ -41,71 +52,28 @@ main
 
 	cout << nameFunction << "rhdg_p = " << rhdg_p << endl;
 
-	// Ask the RandomHexadecimalDigitGenerator to generate some test strings.
+	generateTestStrings_batch_1();
 
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	cout << nameFunction << endl;
+	cout << nameFunction << endl;
 
-	stringLength = 1;
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	rhdg_p->setUseSeparatorCharacter(true);
 
-	stringLength = 2;
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	generateTestStrings_batch_2();
 
-	stringLength = 4;
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	cout << nameFunction << endl;
+	cout << nameFunction << endl;
 
-	stringLength = 8;
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	rhdg_p->setSeparatorCharacter(':');
 
-	stringLength = 16;
-	cout << nameFunction << "Random hex string = " << rhdg_p->generateRandomHexValue_invokeUsingDirectFunction(stringLength) << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	generateTestStrings_batch_2();
 
-	rhdg_p->setStringLength(0);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	cout << nameFunction << endl;
+	cout << nameFunction << endl;
 
-	rhdg_p->setStringLength(3);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	rhdg_p->setSeparatorCharacter('|');
 
-	rhdg_p->setStringLength(5);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
-
-	rhdg_p->setStringLength(6);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
-
-	rhdg_p->setStringLength(7);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
-
-	rhdg_p->setStringLength(9);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
-
-	rhdg_p->setStringLength(-10);
-	cout << nameFunction << "Random hex string = " << rhdg_p->generate() << endl;
-	cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
-	cout << nameFunction << "----------------------------------------" << endl;
+	generateTestStrings_batch_1();
 }
 
 
@@ -145,4 +113,95 @@ createAndTestRHDG
 
 	return(rhdg_a_p);
 }
+
+
+void
+generateTestStrings_batch_1
+(
+)
+{
+	const
+	string   nameFunction = "generateTestStrings_batch_1 : ";
+
+	int      stringLength = 0;
+
+
+	cout << nameFunction << "Enter" << endl;
+
+	// Ask the RandomHexadecimalDigitGenerator to generate some test strings.
+	//
+	// The length of the test string to be generated, will be passed as an argument to the test
+	// function, i.e. generate(), when it is invoked.
+
+	for
+	(
+	 stringLength  = 0;
+	 stringLength <= 16;
+	 stringLength++
+	)
+	{
+		cout << nameFunction << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+
+		cout << nameFunction << "Random hex string = " << rhdg_p->generate(stringLength) << endl;
+
+		cout << nameFunction << "Current string length setting = " << rhdg_p->getStringLength() << endl;
+
+		cout << nameFunction << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+	}
+
+	cout << nameFunction << "Exit" << endl;
+}
+
+
+void
+generateTestStrings_batch_2
+(
+)
+{
+	const
+	string   nameFunction = "generateTestStrings_batch_2 : ";
+
+	int      stringLength = 0;
+
+
+	cout << nameFunction << "Enter" << endl;
+
+	// Ask the RandomHexadecimalDigitGenerator to generate some test strings.
+	//
+	// The length of the test string to be generated, will be explicitly set before the test
+	// function, i.e. generate(), is invoked. Note that when the test function is invoked, it is
+	// invoked without any arguments. When it is invoked without any arguments, the default value
+	// for ...
+
+	for
+	(
+	 stringLength  = 0;
+	 stringLength <= 16;
+	 stringLength++
+	)
+	{
+		string   randomHexString;
+
+		int      stringLength_current;
+
+
+		rhdg_p->setStringLength(stringLength);
+
+		stringLength_current = rhdg_p->getStringLength();
+
+		randomHexString = rhdg_p->generate();
+
+
+		cout << nameFunction << ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << endl;
+
+		cout << nameFunction << "Random hex string = " << randomHexString << endl;
+
+		cout << nameFunction << "Current string length setting = " << stringLength_current << endl;
+
+		cout << nameFunction << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" << endl;
+	}
+
+	cout << nameFunction << "Exit" << endl;
+}
+
 

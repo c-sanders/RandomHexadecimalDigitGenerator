@@ -48,20 +48,36 @@ RandomHexadecimalDigitGenerator
 		(
 		);
 
-		string
-		generateRandomHexValue_invokeUsingBoundFunction
+		char
+		setSeparatorCharacter
 		(
-		 int   amount
+		 char   separatorCharacter
 		);
 
-		string
-		generateRandomHexValue_invokeUsingDirectFunction
+		char
+		getSeparatorCharacter
 		(
-		 int   amount
+		);
+
+		void
+		setUseSeparatorCharacter
+		(
+		    bool   useSeparatorCharacter
 		);
 
 		string
 		generate
+		(
+		);
+
+		string
+		generate
+		(
+		 int   stringLength
+		);
+
+		string
+		generateUUID
 		(
 		);
 
@@ -88,6 +104,18 @@ RandomHexadecimalDigitGenerator
 		(
 		);
 
+		string
+		generateRandomHexValue_invokeUsingBoundFunction
+		(
+		 int   amount
+		);
+
+		string
+		generateRandomHexValue_invokeUsingDirectFunction
+		(
+		 int   amount
+		);
+
 		char
 		convertIntToChar
 		(
@@ -110,6 +138,10 @@ RandomHexadecimalDigitGenerator
 		uniform_int_distribution<int>   * distribution_p = nullptr;  // (0, 15);
 
 		int                               stringLength;
+
+		bool                              useSeparatorCharacter;
+
+		char                              separatorCharacter;
 };
 
 

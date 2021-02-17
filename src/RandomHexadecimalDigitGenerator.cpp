@@ -83,6 +83,9 @@ RandomHexadecimalDigitGenerator::RandomHexadecimalDigitGenerator
 	this->setupRNG_default();
 	this->setupRNG_mt19937();
 
+	this->useSeparatorCharacter = false;
+	this->separatorCharacter    = '-';
+
 	cout << nameFunction << "Exit" << endl;
 }
 
@@ -155,6 +158,36 @@ RandomHexadecimalDigitGenerator::getStringLength
 	return(this->stringLength);
 }
 
+
+char
+RandomHexadecimalDigitGenerator::setSeparatorCharacter
+(
+ char   separatorCharacter
+)
+{
+	this->separatorCharacter = separatorCharacter;
+
+	return(this->separatorCharacter);
+}
+
+
+char
+RandomHexadecimalDigitGenerator::getSeparatorCharacter
+(
+)
+{
+	return(this->separatorCharacter);
+}
+
+
+void
+RandomHexadecimalDigitGenerator::setUseSeparatorCharacter
+(
+    bool   useSeparatorCharacter
+)
+{
+	this->useSeparatorCharacter = useSeparatorCharacter;
+}
 
 void
 RandomHexadecimalDigitGenerator::setupRNG_default
@@ -282,15 +315,8 @@ RandomHexadecimalDigitGenerator::generateRandomHexValue_invokeUsingDirectFunctio
 
 	char           hexDigit;
 
-	stringstream   hexString,
-	               hexString_humanReadable;
+	stringstream   hexString;
 
-
-	// Get a random integer which is in the range 0 - 15.
-
-	// Can the following be turned into a Lambda function?
-	
-	(* this->distribution_p)(* this->rng_p);
 
 	// value = rng();
 
@@ -305,24 +331,36 @@ RandomHexadecimalDigitGenerator::generateRandomHexValue_invokeUsingDirectFunctio
 	 ++counter
 	)
 	{
-		hexDigit = this->convertIntToChar((* this->distribution_p)(* this->rng_p));
+		int   randomInteger;
 
-		hexString               << hexDigit;
-		hexString_humanReadable << hexDigit;
 
-		// cout << counter << endl;
+		// Get a random integer which is in the range 0 - 15.
+		//
+		// Can the following segment of the expression below be turned into a Lambda function?
+		//
+		//   (* this->distribution_p)(* this->rng_p);
 
-		if (
-		    (((counter + 1) % 4) == 0) &&
-		    ((counter + 1) != amount)
-		   )
+		randomInteger = (* this->distribution_p)(* this->rng_p);
+
+		// Convert this random integer into a character which represents a valid dexadecimal digit.
+
+		hexDigit = this->convertIntToChar(randomInteger);
+
+		hexString << hexDigit;
+
+		if (this->useSeparatorCharacter)
 		{
-			hexString_humanReadable << '-';
+			if (
+				(((counter + 1) % 4) == 0) &&
+				((counter + 1) != amount)
+			   )
+			{
+				hexString << this->separatorCharacter;
+			}
 		}
 	}
 
-	cout << "Hex string                  = " << hexString.str() << endl;
-	cout << "Hex string (human readable) = " << hexString_humanReadable.str() << endl;
+	// cout << "Hex string                  = " << hexString.str() << endl;
 
 	return(hexString.str());
 }
@@ -348,6 +386,48 @@ RandomHexadecimalDigitGenerator::generate
 	// digits the generated string should contain.
 
 	hexString = this->generateRandomHexValue_invokeUsingDirectFunction(this->stringLength);
+
+	return(hexString);
+}
+
+
+string
+RandomHexadecimalDigitGenerator::generate
+(
+ int   stringLength
+)
+{
+	string   hexString;
+
+
+	hexString = this->generateRandomHexValue_invokeUsingDirectFunction(stringLength);
+
+	return(hexString);
+}
+
+
+/**
+ * @brief RandomHexadecimalDigitGenerator::generateUUID
+ * @return A string which is comprised only of 16 random hexadecimal digits.
+ * 
+ * This method can be used to generate a string which is comprised only of 16 random hexadecimal
+ * digits.
+ * 
+ * It is essentially a convenience method, which can be used instead of the following
+ * method invocation;
+ * 
+ *   RandomHexadecimalDigitGenerator::generate(16)
+ */
+
+string
+RandomHexadecimalDigitGenerator::generateUUID
+(
+)
+{
+	string   hexString;
+
+
+	hexString = this->generateRandomHexValue_invokeUsingDirectFunction(16);
 
 	return(hexString);
 }
